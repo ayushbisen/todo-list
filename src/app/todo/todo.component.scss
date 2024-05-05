@@ -1,0 +1,41 @@
+.todo-container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    gap: 2rem;
+
+    &>div {
+        &>form {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+    }
+
+    &>div {
+        &>div {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: start;
+            align-items: center;
+
+            ::ng-deep {
+                .mat-mdc-card {
+                    width: 20rem;
+                    padding: 0rem 0rem 3rem 0rem;
+                    background-color: wheat !important;
+
+                    .mdc-card__actions {
+                        position: absolute;
+                        bottom: 0;
+                        right: 0;
+
+                        .mat-icon {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

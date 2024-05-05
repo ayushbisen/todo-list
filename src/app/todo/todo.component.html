@@ -1,0 +1,61 @@
+<div class="todo-container">
+    <div>
+        <h2>Add Task</h2>
+        <form *ngIf="userFromControlsGroup" [formGroup]="userFromControlsGroup"
+            (ngSubmit)="onSubmit(userFromControlsGroup)">
+            <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input type="text" matInput placeholder="text" formControlName="title">
+                <mat-error *ngIf="userFromControlsGroup.controls['title'].hasError('required')">
+                    Title is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Priority:</mat-label>
+                <mat-select formControlName="priority" id="position">
+                    <mat-option *ngFor="let pos of positions" [value]="pos">{{
+                        pos
+                        }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="userFromControlsGroup.controls['priority'].hasError('required')">
+                    Description is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <input type="text" matInput placeholder="text" formControlName="description">
+                <mat-error *ngIf="userFromControlsGroup.controls['description'].hasError('required')">
+                    Description is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <button mat-raised-button type="submit" *ngIf="!isEditMode" color="accent">Add</button>
+            <button mat-raised-button type="submit" color="accent" *ngIf="isEditMode">Update</button>
+            <br />
+            <button mat-raised-button type="button" (click)="onResetForm()" color="warn">reset</button>
+        </form>
+    </div>
+    <div>
+        <h2>Todo List</h2>
+        <div>
+            <mat-card *ngFor="let item of data">
+                <mat-card-header>
+                    <mat-card-title>{{item.title | uppercase}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        priority: {{item.priority}}
+                    </p>
+                    <p>
+                        Description: {{item.description}}
+                    </p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <mat-icon aria-hidden="false" aria-label="edit icon" (click)="onEditClick(item)"
+                        fontIcon="edit"></mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="delete icon" (click)="onDeleteClick(item)"
+                        fontIcon="delete"></mat-icon>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>
